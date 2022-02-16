@@ -2,10 +2,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import pandas as pd
+import os
+import csv
+
+os.getcwd()
 
 # Load the data
 df = pd.read_csv("./data.csv")
+print(df)
 
+print(df.corr())
 
 def assess_correlation(dataframe, column1, column2):
     dataframe.plot(column1, column2, style='o')
@@ -14,9 +20,24 @@ def assess_correlation(dataframe, column1, column2):
     plt.xlabel(column1)
     plt.ylabel(column2)
     plt.title(title)
-    plt.savefig('images/' + filename)
+    plt.savefig('./images/' + filename)
  
+print(df.head(3))
+print(df.columns)
+assess_correlation(df, "Cylinders", "Horsepower")
+sub_df = df[["Cylinders", "Horsepower"]]
+sns_plot = sns.catplot(x="Cylinders", y="Horsepower", data=df)
+sns_plot.fig.suptitle("Cylinders vs Horsepower.pdf")
 
-sub_df = df[["Car", "Origin"]]
-sns_plot = sns.catplot(x="Car", y="Origin", data=sub_df)
-sns_plot.fig.suptitle("Sex vs survived.pdf")
+
+def make_scatter_plot(dataframe, column1, column2, column3):
+    dataframe.plot.scatter(column1, column2, c=column3, cmap='Wistia')
+    title = column1 + " vs " + column2 + " vs " + column3
+    filename = f"Scatter_{column1}_vs_{column2}_vs_{column3}.pdf"
+    plt.xlabel(column1)
+    plt.ylabel(column2)
+    plt.title(title)
+    plt.show()
+    plt.savefig('./images/' + filename)
+
+make_scatter_plot(df, "Weight", "Cylinders", "Horsepower")
