@@ -4,86 +4,86 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-import warnings
-warnings.filterwarnings('ignore')
+import random
 
 data = pd.read_csv("./data.csv")
 
-data.head()
-
-data = data.loc[:, ['Cylinders', 'Horsepower']]
-data.head(2)
+data = data.loc[:, ['Acceleration', 'Model']]
 
 X = data.values
 
-#sns.scatterplot(X[:,0], X[:, 1])
-#filename = f"Test.pdf"
-#plt.xlabel('Income')
-#plt.ylabel('Loan')
-#plt.show()
-#plt.savefig('./images/' + filename)
 
-def calculate_cost(X, centroids, cluster):
-  sum = 0
-  for i, val in enumerate(X):
-    sum += np.sqrt((centroids[int(cluster[i]), 0]-val[0])**2 +(centroids[int(cluster[i]), 1]-val[1])**2)
-  return sum
+m=X.shape[0]
+n=X.shape[1] 
+n_iter=50
 
-def kmeans(X, k):
-    diff = 1
-    cluster = np.zeros(X.shape[0])
-    centroids = data.sample(n=k).values
-    while diff:
-        for i, row in enumerate(X):
-            mn_dist = float('inf')
-        # dist of the point from all centroids
-        for idx, centroid in enumerate(centroids):
-            d = np.sqrt((centroid[0]-row[0])**2 + (centroid[1]-row[1])**2)
-            # store closest centroid
-            if mn_dist > d:
-               mn_dist = d
-               cluster[i] = idx
-        new_centroids = pd.DataFrame(X).groupby(by=cluster).mean().values
-        # if centroids are same then leave
-        #print("-------------")
-        #print("centroid")
-        #print(centroids)
-        #print("New centroid - ")
-        #print(new_centroids)
-        if np.count_nonzero(centroids-new_centroids) == 0:
-            print("if equal")
-            diff = 0
-        else:
-            print("leave")
-            centroids = new_centroids
-            
-    return centroids, cluster
+# computing the initial centroids randomly
+K=5
 
-print("aegrg")
+# creating an empty centroid array
+centroids=np.array([]).reshape(n,0) 
 
-cost_list = []
-for k in range(1, 10):
-    centroids, cluster = kmeans(X, k)
-    # WCSS (Within cluster sum of square)
-    cost = calculate_cost(X, centroids, cluster)
-    cost_list.append(cost)
+# creating 5 random centroids
+for k in range(K):
+    centroids=np.c_[centroids,X[random.randint(0,m-1)]]
 
-#print("h")
-#sns.lineplot(x=range(1,10), y=cost_list, marker='o')
-#filename2 = f"Test2.pdf"
-#plt.xlabel('k')
-#plt.ylabel('WCSS')
-#plt.savefig('./images/' + filename2)
-#plt.show()
+output={}
 
-k = 4
-print("aegrg")
-centroids, cluster = kmeans(X, k)
+# creating an empty array
+euclid=np.array([]).reshape(m,0)
 
+# finding distance between for each centroid
+for k in range(K):
+       dist=np.sum((X-centroids[:,k])**2,axis=1)
+       euclid=np.c_[euclid,dist]
+
+# storing the minimum value we have computed
+minimum=np.argmin(euclid,axis=1)+1
+
+# computing the mean of separated clusters
+cent={}
+for k in range(K):
+    cent[k+1]=np.array([]).reshape(2,0)
+
+# assigning of clusters to points
+for k in range(m):
+    cent[minimum[k]]=np.c_[cent[minimum[k]],X[k]]
+for k in range(K):
+    cent[k+1]=cent[k+1].T
+
+# computing mean and updating it
+for k in range(K):
+     centroids[:,k]=np.mean(cent[k+1],axis=0)
+
+# repeating the above steps again and again
+for i in range(n_iter):
+      euclid=np.array([]).reshape(m,0)
+      for k in range(K):
+          dist=np.sum((X-centroids[:,k])**2,axis=1)
+          euclid=np.c_[euclid,dist]
+      C=np.argmin(euclid,axis=1)+1
+      cent={}
+      for k in range(K):
+           cent[k+1]=np.array([]).reshape(2,0)
+      for k in range(m):
+           cent[C[k]]=np.c_[cent[C[k]],X[k]]
+      for k in range(K):
+           cent[k+1]=cent[k+1].T
+      for k in range(K):
+           centroids[:,k]=np.mean(cent[k+1],axis=0)
+      final=cent
+
+plt.scatter(X[:,0],X[:,1])
+plt.rcParams.update({'figure.figsize':(10,7.5), 'figure.dpi':100})
+plt.title('Data.csv')
+
+for k in range(K):
+    plt.scatter(final[k+1][:,0],final[k+1][:,1])
 filename = f"Test.pdf"
-sns.scatterplot(X[:,0], X[:, 1], hue=cluster)
-sns.scatterplot(centroids[:,0], centroids[:, 1], s=100, color='y')
-plt.xlabel('Income')
-plt.ylabel('Loan')
+plt.scatter(centroids[0,:],centroids[1,:],s=300,c='yellow')
+plt.rcParams.update({'figure.figsize':(10,7.5), 'figure.dpi':100})
+plt.xlabel('Acceleration')
+plt.ylabel('Model')
 plt.show()
 plt.savefig('./images/' + filename)
+exit()
