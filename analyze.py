@@ -40,4 +40,4 @@ def make_scatter_plot(dataframe, column1, column2, column3):
     plt.show()
     plt.savefig('./images/' + filename)
 
-make_scatter_plot(df, "Model", "MPG", "Weight")
+make_scatter_plot(df, "MPG", "Weight", "Model")
