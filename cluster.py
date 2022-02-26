@@ -14,9 +14,9 @@ X = data.values
 
 m=X.shape[0]
 n=X.shape[1] 
-n_iter=50
+n_iter=15
 
-K=2
+K=3
 
 centroids=np.array([]).reshape(n,0) 
 
@@ -61,18 +61,16 @@ for i in range(n_iter):
     for k in range(K):
         centroids[:,k]=np.mean(cent[k+1],axis=0)
     final=cent
-
-plt.scatter(X[:,0],X[:,1])
-plt.rcParams.update({'figure.figsize':(10,7.5), 'figure.dpi':100})
-plt.title('Data.csv')
-
-for k in range(K):
-    plt.scatter(final[k+1][:,0],final[k+1][:,1])
-filename = f"Test.pdf"
-plt.scatter(centroids[0,:],centroids[1,:],s=300,c='yellow')
-plt.rcParams.update({'figure.figsize':(10,7.5), 'figure.dpi':100})
-plt.xlabel('MPG')
-plt.ylabel('Weight')
-plt.show()
-plt.savefig('./images/' + filename)
-exit()
+    plt.scatter(X[:,0],X[:,1])
+    plt.rcParams.update({'figure.figsize':(10,7.5), 'figure.dpi':100})
+    plt.title('Data.csv')
+    
+    for k in range(K):
+        plt.scatter(final[k+1][:,0],final[k+1][:,1])
+    filename = f"Cluster.pdf"
+    plt.scatter(centroids[0,:],centroids[1,:],s=300,c='yellow')
+    plt.rcParams.update({'figure.figsize':(10,7.5), 'figure.dpi':100})
+    plt.xlabel('MPG')
+    plt.ylabel('Weight')
+    plt.savefig('./images/' + filename)
+    plt.show()
