@@ -11,7 +11,7 @@ from graphviz import Graph
 dataframe = pd.read_csv("data.csv")
 
 nb_cars = 15 #len(dataframe.index)
-threshold = 50
+threshold = 500
 
 print(nb_cars)
 
@@ -28,8 +28,8 @@ def compute_dissimilarity(car_1_id, car_2_id):
     car_1_mpg = dataframe.loc[car_1_id][1]
     car_2_mpg = dataframe.loc[car_2_id][1]
 
-    car_1_horsepower = dataframe.loc[car_1_id][4]
-    car_2_horsepower = dataframe.loc[car_2_id][4]
+    car_1_weight = dataframe.loc[car_1_id][5]
+    car_2_weight = dataframe.loc[car_2_id][5]
 
     car_1_origin = dataframe.loc[car_1_id][8]
     car_2_origin = dataframe.loc[car_2_id][8]
@@ -39,7 +39,7 @@ def compute_dissimilarity(car_1_id, car_2_id):
     else:
         dissimilarity_origin = 1
 
-    dissimilarity = math.sqrt((car_1_mpg-car_2_mpg)**2+(car_1_horsepower-car_2_horsepower)**2+dissimilarity_origin)
+    dissimilarity = math.sqrt((car_1_mpg-car_2_mpg)**2+(car_1_weight-car_2_weight)**2+dissimilarity_origin)
 
     print("----")
     car_1_name = dataframe.loc[car_1_id]["Car"]

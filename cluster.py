@@ -16,7 +16,7 @@ m=X.shape[0]
 n=X.shape[1] 
 n_iter=50
 
-# computing the initial centroids randomly
+# computing the initial centroids
 K=2
 
 # creating an empty centroid array

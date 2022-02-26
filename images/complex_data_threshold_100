@@ -16,9 +16,6 @@ strict graph {
 	"Plymouth Satellite (sw)"
 	"AMC Rebel SST (sw)"
 	"Chevrolet Chevelle Malibu" -- "Buick Skylark 320" [color=darkolivegreen4 penwidth=1.1]
-	"Chevrolet Chevelle Malibu" -- "Plymouth Satellite" [color=darkolivegreen4 penwidth=1.1]
-	"Chevrolet Chevelle Malibu" -- "AMC Rebel SST" [color=darkolivegreen4 penwidth=1.1]
-	"Chevrolet Chevelle Malibu" -- "Ford Torino" [color=darkolivegreen4 penwidth=1.1]
 	"Chevrolet Chevelle Malibu" -- "Ford Galaxie 500" [color=darkolivegreen4 penwidth=1.1]
 	"Chevrolet Chevelle Malibu" -- "Chevrolet Impala" [color=darkolivegreen4 penwidth=1.1]
 	"Chevrolet Chevelle Malibu" -- "Plymouth Fury iii" [color=darkolivegreen4 penwidth=1.1]
@@ -43,7 +40,6 @@ strict graph {
 	"Buick Skylark 320" -- "Ford Torino (sw)" [color=darkolivegreen4 penwidth=1.1]
 	"Buick Skylark 320" -- "Plymouth Satellite (sw)" [color=darkolivegreen4 penwidth=1.1]
 	"Buick Skylark 320" -- "AMC Rebel SST (sw)" [color=darkolivegreen4 penwidth=1.1]
-	"Plymouth Satellite" -- "Chevrolet Chevelle Malibu" [color=darkolivegreen4 penwidth=1.1]
 	"Plymouth Satellite" -- "Buick Skylark 320" [color=darkolivegreen4 penwidth=1.1]
 	"Plymouth Satellite" -- "Ford Galaxie 500" [color=darkolivegreen4 penwidth=1.1]
 	"Plymouth Satellite" -- "Chevrolet Impala" [color=darkolivegreen4 penwidth=1.1]
@@ -55,7 +51,6 @@ strict graph {
 	"Plymouth Satellite" -- "Ford Torino (sw)" [color=darkolivegreen4 penwidth=1.1]
 	"Plymouth Satellite" -- "Plymouth Satellite (sw)" [color=darkolivegreen4 penwidth=1.1]
 	"Plymouth Satellite" -- "AMC Rebel SST (sw)" [color=darkolivegreen4 penwidth=1.1]
-	"AMC Rebel SST" -- "Chevrolet Chevelle Malibu" [color=darkolivegreen4 penwidth=1.1]
 	"AMC Rebel SST" -- "Buick Skylark 320" [color=darkolivegreen4 penwidth=1.1]
 	"AMC Rebel SST" -- "Ford Galaxie 500" [color=darkolivegreen4 penwidth=1.1]
 	"AMC Rebel SST" -- "Chevrolet Impala" [color=darkolivegreen4 penwidth=1.1]
@@ -67,7 +62,6 @@ strict graph {
 	"AMC Rebel SST" -- "Ford Torino (sw)" [color=darkolivegreen4 penwidth=1.1]
 	"AMC Rebel SST" -- "Plymouth Satellite (sw)" [color=darkolivegreen4 penwidth=1.1]
 	"AMC Rebel SST" -- "AMC Rebel SST (sw)" [color=darkolivegreen4 penwidth=1.1]
-	"Ford Torino" -- "Chevrolet Chevelle Malibu" [color=darkolivegreen4 penwidth=1.1]
 	"Ford Torino" -- "Buick Skylark 320" [color=darkolivegreen4 penwidth=1.1]
 	"Ford Torino" -- "Ford Galaxie 500" [color=darkolivegreen4 penwidth=1.1]
 	"Ford Torino" -- "Chevrolet Impala" [color=darkolivegreen4 penwidth=1.1]
@@ -84,7 +78,6 @@ strict graph {
 	"Ford Galaxie 500" -- "Plymouth Satellite" [color=darkolivegreen4 penwidth=1.1]
 	"Ford Galaxie 500" -- "AMC Rebel SST" [color=darkolivegreen4 penwidth=1.1]
 	"Ford Galaxie 500" -- "Ford Torino" [color=darkolivegreen4 penwidth=1.1]
-	"Ford Galaxie 500" -- "Pontiac Catalina" [color=darkolivegreen4 penwidth=1.1]
 	"Ford Galaxie 500" -- "AMC Ambassador DPL" [color=darkolivegreen4 penwidth=1.1]
 	"Ford Galaxie 500" -- "Citroen DS-21 Pallas" [color=darkolivegreen4 penwidth=1.1]
 	"Ford Galaxie 500" -- "Chevrolet Chevelle Concours (sw)" [color=darkolivegreen4 penwidth=1.1]
@@ -96,7 +89,6 @@ strict graph {
 	"Chevrolet Impala" -- "Plymouth Satellite" [color=darkolivegreen4 penwidth=1.1]
 	"Chevrolet Impala" -- "AMC Rebel SST" [color=darkolivegreen4 penwidth=1.1]
 	"Chevrolet Impala" -- "Ford Torino" [color=darkolivegreen4 penwidth=1.1]
-	"Chevrolet Impala" -- "Pontiac Catalina" [color=darkolivegreen4 penwidth=1.1]
 	"Chevrolet Impala" -- "AMC Ambassador DPL" [color=darkolivegreen4 penwidth=1.1]
 	"Chevrolet Impala" -- "Citroen DS-21 Pallas" [color=darkolivegreen4 penwidth=1.1]
 	"Chevrolet Impala" -- "Chevrolet Chevelle Concours (sw)" [color=darkolivegreen4 penwidth=1.1]
@@ -120,8 +112,6 @@ strict graph {
 	"Pontiac Catalina" -- "Plymouth Satellite" [color=darkolivegreen4 penwidth=1.1]
 	"Pontiac Catalina" -- "AMC Rebel SST" [color=darkolivegreen4 penwidth=1.1]
 	"Pontiac Catalina" -- "Ford Torino" [color=darkolivegreen4 penwidth=1.1]
-	"Pontiac Catalina" -- "Ford Galaxie 500" [color=darkolivegreen4 penwidth=1.1]
-	"Pontiac Catalina" -- "Chevrolet Impala" [color=darkolivegreen4 penwidth=1.1]
 	"Pontiac Catalina" -- "Plymouth Fury iii" [color=darkolivegreen4 penwidth=1.1]
 	"Pontiac Catalina" -- "AMC Ambassador DPL" [color=darkolivegreen4 penwidth=1.1]
 	"Pontiac Catalina" -- "Citroen DS-21 Pallas" [color=darkolivegreen4 penwidth=1.1]
@@ -209,5 +199,5 @@ strict graph {
 	"AMC Rebel SST (sw)" -- "Chevrolet Chevelle Concours (sw)" [color=darkolivegreen4 penwidth=1.1]
 	"AMC Rebel SST (sw)" -- "Ford Torino (sw)" [color=darkolivegreen4 penwidth=1.1]
 	"AMC Rebel SST (sw)" -- "Plymouth Satellite (sw)" [color=darkolivegreen4 penwidth=1.1]
-	fontsize=20 label="threshold 50"
+	fontsize=20 label="threshold 100"
 }
