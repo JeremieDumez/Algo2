@@ -10,8 +10,8 @@ from graphviz import Graph
 
 dataframe = pd.read_csv("data.csv")
 
-nb_cars = len(dataframe.index)
-threshold = 100
+nb_cars = 15 #len(dataframe.index)
+threshold = 50
 
 print(nb_cars)
 
@@ -58,7 +58,7 @@ print("dissimilarity matrix")
 print(dissimilarity_matrix)
 
 # build a graph from the dissimilarity
-dot = Graph(comment='Graph created from complex data',
+dot = Graph(comment='Graph of cars',
             strict=True)
 for car_id in range(nb_cars):
     car_name = dataframe.loc[car_id][0]

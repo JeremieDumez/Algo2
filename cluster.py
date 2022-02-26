@@ -12,7 +12,6 @@ data = data.loc[:, ['MPG', 'Weight']]
 
 X = data.values
 
-
 m=X.shape[0]
 n=X.shape[1] 
 n_iter=50
@@ -23,10 +22,10 @@ K=2
 # creating an empty centroid array
 centroids=np.array([]).reshape(n,0) 
 
-# creating 5 random centroids
+# creating centroids
 for k in range(K):
     centroids=np.c_[centroids,X[random.randint(0,m-1)]]
-
+    
 output={}
 
 # creating an empty array
@@ -53,25 +52,25 @@ for k in range(K):
 
 # computing mean and updating it
 for k in range(K):
-     centroids[:,k]=np.mean(cent[k+1],axis=0)
+    centroids[:,k]=np.mean(cent[k+1],axis=0)
 
 # repeating the above steps again and again
 for i in range(n_iter):
-      euclid=np.array([]).reshape(m,0)
-      for k in range(K):
-          dist=np.sum((X-centroids[:,k])**2,axis=1)
-          euclid=np.c_[euclid,dist]
-      C=np.argmin(euclid,axis=1)+1
-      cent={}
-      for k in range(K):
-           cent[k+1]=np.array([]).reshape(2,0)
-      for k in range(m):
-           cent[C[k]]=np.c_[cent[C[k]],X[k]]
-      for k in range(K):
-           cent[k+1]=cent[k+1].T
-      for k in range(K):
-           centroids[:,k]=np.mean(cent[k+1],axis=0)
-      final=cent
+    euclid=np.array([]).reshape(m,0)
+    for k in range(K):
+        dist=np.sum((X-centroids[:,k])**2,axis=1)
+        euclid=np.c_[euclid,dist]
+    C=np.argmin(euclid,axis=1)+1
+    cent={}
+    for k in range(K):
+        cent[k+1]=np.array([]).reshape(2,0)
+    for k in range(m):
+        cent[C[k]]=np.c_[cent[C[k]],X[k]]
+    for k in range(K):
+        cent[k+1]=cent[k+1].T
+    for k in range(K):
+        centroids[:,k]=np.mean(cent[k+1],axis=0)
+    final=cent
 
 plt.scatter(X[:,0],X[:,1])
 plt.rcParams.update({'figure.figsize':(10,7.5), 'figure.dpi':100})
@@ -82,8 +81,8 @@ for k in range(K):
 filename = f"Test.pdf"
 plt.scatter(centroids[0,:],centroids[1,:],s=300,c='yellow')
 plt.rcParams.update({'figure.figsize':(10,7.5), 'figure.dpi':100})
-plt.xlabel('Acceleration')
-plt.ylabel('Model')
+plt.xlabel('MPG')
+plt.ylabel('Weight')
 plt.show()
 plt.savefig('./images/' + filename)
 exit()
