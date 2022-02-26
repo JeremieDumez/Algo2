@@ -8,7 +8,7 @@ import random
 
 data = pd.read_csv("./data.csv")
 
-data = data.loc[:, ['Acceleration', 'Model']]
+data = data.loc[:, ['MPG', 'Weight']]
 
 X = data.values
 
@@ -18,7 +18,7 @@ n=X.shape[1]
 n_iter=50
 
 # computing the initial centroids randomly
-K=5
+K=2
 
 # creating an empty centroid array
 centroids=np.array([]).reshape(n,0) 

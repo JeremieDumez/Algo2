@@ -24,10 +24,10 @@ def assess_correlation(dataframe, column1, column2):
  
 print(df.head(3))
 print(df.columns)
-assess_correlation(df, "Cylinders", "Horsepower")
-sub_df = df[["Cylinders", "Horsepower"]]
-sns_plot = sns.catplot(x="Cylinders", y="Horsepower", data=df)
-sns_plot.fig.suptitle("Cylinders vs Horsepower.pdf")
+assess_correlation(df, "MPG", "Weight")
+sub_df = df[["MPG", "Weight"]]
+sns_plot = sns.catplot(x="MPG", y="Weight", data=df)
+sns_plot.fig.suptitle("MPG vs Weight.pdf")
 
 
 def make_scatter_plot(dataframe, column1, column2, column3):
@@ -40,4 +40,4 @@ def make_scatter_plot(dataframe, column1, column2, column3):
     plt.show()
     plt.savefig('./images/' + filename)
 
-make_scatter_plot(df, "Weight", "Cylinders", "Horsepower")
+make_scatter_plot(df, "Model", "MPG", "Weight")

@@ -1,81 +1,42 @@
+import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
+import seaborn as sns
+import sklearn
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+data = pd.read_csv("./data.csv")
 
-#ppt presentation 2 slide 200~
+data = data.loc[:, ['MPG', 'Weight']]
 
-"""
-    We will study a heursitic for obtaining a relevant number of clusters
-    in a clustering situation.
-    The clustering will be performed by a Spectral Clustering.
-    Spectral Clustering works with an adjacency matrix
-    or a similarity matrix.
-"""
+X = data.values
 
-from sklearn.cluster import SpectralClustering
-import numpy as np
-import matplotlib.pyplot as plt
-
-# load the data
-adjacency_matrix = np.load("data/adjacency_matrix.npy")
-# nb datapoints
-nb_datapoints = adjacency_matrix.shape[0]
-dataset = [x for x in range(nb_datapoints)]
+plt.scatter(X[:,0],X[:,1])
+plt.show()
 
 
-def cluster_and_compute_normalized_cut(nb_clusters, adjacency_matrix):
-    # setup spectral clustering
-    sc = SpectralClustering(nb_clusters, affinity='precomputed')
-    # apply the Spectral Clustering to the adjacency matrix
-    sc.fit_predict(adjacency_matrix)
+Sum_of_squared_distances = []
+K = range(1,10)
+for num_clusters in K :
+    kmeans = KMeans(n_clusters=num_clusters)
+    kmeans.fit(data)
+    Sum_of_squared_distances.append(kmeans.inertia_)
+plt.plot(K,Sum_of_squared_distances,'bx-')
+plt.xlabel('Values of K') 
+plt.ylabel('Sum of squared distances/Inertia') 
+plt.title('Elbow Method For Optimal k')
+plt.show()
 
-    clusters = list()
-    for cluter_index in range(nb_clusters):
-        cluster = np.where(sc.labels_ == cluter_index)[0]
-        clusters.append(cluster)
-
-    # compute the normalized cut of the clustering
-    normalized_cut = 0
-    for cluster in clusters:
-        """
-            EDIT THIS LOOP
-        """
-        # points that are not in this cluster
-        # EDIT
-        complementary = [x for x in dataset if x not in cluster]
-
-        # compute the cut of the cluster
-        # connections with points outside itsself
-        cluster_cut = 0
-        for point in cluster:
-            # EDIT
-            point_outside_connections = sum(adjacency_matrix[point, complementary])
-            cluster_cut += point_outside_connections
-
-        # compute the degree of the cluster
-        # it is the sum of the degree of all its nodes
-        cluster_degree = 0
-        for point in cluster:
-            point_degree = sum(adjacency_matrix[point, :])
-            cluster_degree += point_degree
-
-        # compute the normalized cut
-        cluster_normalized_cut = cluster_cut/cluster_degree
-        normalized_cut += cluster_normalized_cut
-
-    print(f"normalized cut: {normalized_cut}")
-    return normalized_cut
-
-
-normalized_cuts = list()
-max_nb_clusters = 10
-tried_nb_clusters = range(1, max_nb_clusters)
-
-for nb_clusters in tried_nb_clusters:
-    print(f"======\nnb clusters: {nb_clusters}")
-    normalized_cuts.append(cluster_and_compute_normalized_cut(nb_clusters, adjacency_matrix))
-
-plt.plot(tried_nb_clusters, normalized_cuts, 'o')
-plt.title("normalized cut heuristic")
-plt.xlabel("nb clusters")
-plt.ylabel("normalized cut")
+range_n_clusters = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+silhouette_avg = []
+for num_clusters in range_n_clusters:
+ # initialise kmeans
+    kmeans = KMeans(n_clusters=num_clusters)
+    kmeans.fit(data)
+    cluster_labels = kmeans.labels_
+    # silhouette score
+    silhouette_avg.append(silhouette_score(data, cluster_labels))
+plt.plot(range_n_clusters,silhouette_avg,'bx-')
+plt.xlabel('Values of K') 
+plt.ylabel('Silhouette score') 
+plt.title('Silhouette analysis For Optimal k')
 plt.show()
