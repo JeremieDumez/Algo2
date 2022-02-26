@@ -10,7 +10,7 @@ from graphviz import Graph
 
 dataframe = pd.read_csv("data.csv")
 
-nb_cars = 15 #len(dataframe.index)
+nb_cars = 15
 threshold = 500
 
 print(nb_cars)
@@ -57,7 +57,6 @@ for car_1_id in range(nb_cars):
 print("dissimilarity matrix")
 print(dissimilarity_matrix)
 
-# build a graph from the dissimilarity
 dot = Graph(comment='Graph of cars',
             strict=True)
 for car_id in range(nb_cars):
@@ -65,22 +64,16 @@ for car_id in range(nb_cars):
     dot.node(car_name)
 
 for car_1_id in range(nb_cars):
-    # we use an undirected graph so we do not need
-    # to take the potential reciprocal edge
-    # into account
     for car_2_id in range(nb_cars):
-        # no self loops
         if not car_1_id == car_2_id:
             car_1_name = dataframe.loc[car_1_id][0]
             car_2_name = dataframe.loc[car_2_id][0]
-            # use the threshold condition
             if dissimilarity_matrix[car_1_id, car_2_id] > threshold:
                 dot.edge(car_1_name,
                          car_2_name,
                          color='darkolivegreen4',
                          penwidth='1.1')
 
-# visualize the graph
 dot.attr(label=f"threshold {threshold}", fontsize='20')
 graph_name = f"images/complex_data_threshold_{threshold}"
 dot.render(graph_name)
